@@ -1,6 +1,43 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-
-  <app-digit-button [digit]="1"></app-digit-button>
-  <app-digit-button [digit]="2"></app-digit-button>
+  <!-- todo width in eine CSS-Datei auslagern -->
+  <div class="container" style="width: 300px">
+    <div class="row">
+      DISPLAY
+    </div>
+    <div class="row no-gutters">
+      <div class="col">
+        <div class="row">
+          <div class="col-1">
+            <app-digit-button [digit]="7"></app-digit-button>
+            <app-digit-button [digit]="4"></app-digit-button>
+            <app-digit-button [digit]="1"></app-digit-button>
+          </div>
+          <div class="col-1">
+            <app-digit-button [digit]="8"></app-digit-button>
+            <app-digit-button [digit]="5"></app-digit-button>
+            <app-digit-button [digit]="2"></app-digit-button>
+          </div>
+          <div class="col-1">
+            <app-digit-button [digit]="9"></app-digit-button>
+            <app-digit-button [digit]="6"></app-digit-button>
+            <app-digit-button [digit]="3"></app-digit-button>
+          </div>
+          <div class="col-9"></div>
+        </div>
+        <div class="row">
+          <div class="col-3 center">
+            <app-digit-button [digit]="0"></app-digit-button>
+          </div>
+          <div class="col-9"></div>
+        </div>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-primary">+</button> <br/>
+        <button type="button" class="btn btn-primary">-</button> <br/>
+        <button type="button" class="btn btn-primary">=</button> <br/>
+      </div>
+    </div>
+  </div>
+</div>
 
