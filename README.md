@@ -1,3 +1,15 @@
+# How to build
+
+* install autoconf
+
+brew install autoconf
+
+* install automake
+
+brew install automake
+
+* install sodium (todo: check with clean app, maybe it is part of the config) 
+
 # SodiumTsAngularCalculator
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
