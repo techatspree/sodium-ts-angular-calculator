@@ -14,12 +14,6 @@ export class DigitButtonComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("Init  " + this.digit);
-  }
-
-  // noinspection JSUnusedGlobalSymbols
-  ngAfterViewInit() {
-    console.log("Init after view init " + this.digit);
   }
 
   onClick() {
