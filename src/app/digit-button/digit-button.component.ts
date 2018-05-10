@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Stream, StreamSink, Transaction, Unit} from 'sodiumjs';
 
 @Component({
   selector: 'app-digit-button',
@@ -18,6 +17,7 @@ export class DigitButtonComponent implements OnInit {
     console.log("Init  " + this.digit);
   }
 
+  // noinspection JSUnusedGlobalSymbols
   ngAfterViewInit() {
     console.log("Init after view init " + this.digit);
   }

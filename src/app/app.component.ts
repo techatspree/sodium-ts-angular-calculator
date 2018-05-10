@@ -12,22 +12,27 @@ export class AppComponent {
 
   private digitS : StreamSink<number> = new StreamSink();
 
+  // noinspection JSUnusedLocalSymbols
   private clickDigit = (digit : number) => {
     this.digitS.send(digit);
-  }
+  };
 
+  // noinspection JSUnusedLocalSymbols
   private clickPlus = () => {
     console.log("+ clicked");
-  }
+  };
 
+  // noinspection JSUnusedLocalSymbols
   private clickMinus = () => {
     console.log("- clicked");
-  }
+  };
 
+  // noinspection JSUnusedLocalSymbols
   private clickCompute = () => {
     console.log("= clicked");
-  }
+  };
 
+  // noinspection JSUnusedGlobalSymbols
   ngOnInit() {
     console.log("Init Application");
 
