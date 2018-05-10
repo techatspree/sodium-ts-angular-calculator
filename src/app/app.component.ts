@@ -41,6 +41,5 @@ export class AppComponent {
     });
   }
 
-
   title = 'Sodium Calculator';
 }
