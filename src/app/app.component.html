@@ -1,38 +1,36 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <!-- todo width in eine CSS-Datei auslagern -->
-  <div class="container" style="width: 300px">
+  <div class="container" style="width: 250px">
     <div class="row">
       <app-display-field [displayC]="displayC"></app-display-field>
     </div>
     <div class="row no-gutters">
-      <div class="col">
-        <div class="row">
-          <div class="col-1">
-            <app-digit-button [digit]="7" [clickF]="clickDigit"></app-digit-button>
-            <app-digit-button [digit]="4" [clickF]="clickDigit"></app-digit-button>
-            <app-digit-button [digit]="1"[clickF]="clickDigit" ></app-digit-button>
+      <div class="col no-gutters">
+        <div class="row no-gutters">
+          <div class="col no-gutters">
+            <app-digit-button [digit]="7" [clickF]="clickDigit"></app-digit-button> <br/>
+            <app-digit-button [digit]="4" [clickF]="clickDigit"></app-digit-button> <br/>
+            <app-digit-button [digit]="1" [clickF]="clickDigit"></app-digit-button> <br/>
           </div>
-          <div class="col-1">
-            <app-digit-button [digit]="8"></app-digit-button>
-            <app-digit-button [digit]="5"></app-digit-button>
-            <app-digit-button [digit]="2"></app-digit-button>
+          <div class="col no-gutters">
+            <app-digit-button [digit]="8" [clickF]="clickDigit"></app-digit-button> <br/>
+            <app-digit-button [digit]="5" [clickF]="clickDigit"></app-digit-button> <br/>
+            <app-digit-button [digit]="2" [clickF]="clickDigit"></app-digit-button> <br/>
           </div>
-          <div class="col-1">
-            <app-digit-button [digit]="9"></app-digit-button>
-            <app-digit-button [digit]="6"></app-digit-button>
-            <app-digit-button [digit]="3"></app-digit-button>
+          <div class="col no-gutters">
+            <app-digit-button [digit]="9" [clickF]="clickDigit"></app-digit-button> <br/>
+            <app-digit-button [digit]="6" [clickF]="clickDigit"></app-digit-button> <br/>
+            <app-digit-button [digit]="3" [clickF]="clickDigit"></app-digit-button> <br/>
           </div>
-          <div class="col-9"></div>
         </div>
-        <div class="row">
-          <div class="col-3 center">
+        <div class="row no-gutters">
+          <div class="col center">
             <app-digit-button [digit]="0"></app-digit-button>
           </div>
-          <div class="col-9"></div>
         </div>
       </div>
-      <div class="col">
+      <div class="col no-gutters">
         <button type="button" class="btn btn-primary">+</button> <br/>
         <button type="button" class="btn btn-primary">-</button> <br/>
         <button type="button" class="btn btn-primary">=</button> <br/>
