@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { DigitButtonComponent } from './digit-button/digit-button.component';
+import { DisplayFieldComponent } from './display-field/display-field.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DigitButtonComponent
+    DigitButtonComponent,
+    DisplayFieldComponent
   ],
   imports: [
     BrowserModule

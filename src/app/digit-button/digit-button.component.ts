@@ -17,10 +17,13 @@ export class DigitButtonComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    console.log("Init "+this.digit);
+    this.sClickedSink = new StreamSink<Unit>();
+    this.sClicked = this.sClickedSink.map( u =>  this.digit );
   }
 
   onClick() {
-    console.log("CLICK");
+    this.sClickedSink.send(Unit.UNIT);
+    console.log("CLICK - "+ this.digit);
   }
 }
