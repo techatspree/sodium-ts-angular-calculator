@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Unit, Stream, StreamSink} from 'sodiumjs';
+import {Stream, StreamSink, Transaction, Unit} from 'sodiumjs';
 
 @Component({
   selector: 'app-digit-button',
@@ -8,22 +8,23 @@ import {Unit, Stream, StreamSink} from 'sodiumjs';
 })
 export class DigitButtonComponent implements OnInit {
 
-  private sClickedSink: StreamSink<Unit>;
+  @Input() digit: number;
+  @Input() clickF: (dig: number) => void;
 
-  public sClicked: Stream<number>;
-
-  @Input() digit : number;
-
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-    console.log("Init "+this.digit);
-    this.sClickedSink = new StreamSink<Unit>();
-    this.sClicked = this.sClickedSink.map( u =>  this.digit );
+    console.log("Init  " + this.digit);
+  }
+
+  ngAfterViewInit() {
+    console.log("Init after view init " + this.digit);
   }
 
   onClick() {
-    this.sClickedSink.send(Unit.UNIT);
-    console.log("CLICK - "+ this.digit);
+    console.log("CLICK - " + this.digit);
+    console.log("clickF - " + this.clickF);
+    this.clickF(this.digit);
   }
 }

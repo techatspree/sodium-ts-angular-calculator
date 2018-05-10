@@ -16,12 +16,15 @@ export class DisplayFieldComponent implements OnInit {
 
   ngOnInit() {
     console.log("Init display field");
+  }
+
+  ngAfterViewInit() {
+    console.log("Init after view init display field");
     Transaction.run(() => {
       Operational
         .value(this.displayC)
         .listen( num => { this.display = num; })
     })
-
   }
 
 }

@@ -10,14 +10,18 @@ export class AppComponent {
 
   displayC : Cell<number>;
 
+  private digitS : StreamSink<number> = new StreamSink();
+
+  private clickDigit = (digit : number) => {
+    this.digitS.send(digit);
+  }
+
   ngOnInit() {
     console.log("Init Application");
 
     Transaction.run(() => {
-      const digitClickS = new StreamSink<number>();
-      this.displayC = digitClickS.hold(1234);
+      this.displayC = this.digitS.hold(1234);
     });
-
   }
 
 
