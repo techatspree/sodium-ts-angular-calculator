@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Cell, StreamSink, Transaction } from 'sodiumjs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  displayC : Cell<number>;
+
+  ngOnInit() {
+    console.log("Init Application");
+
+    Transaction.run(() => {
+      const digitClickS = new StreamSink<number>();
+      this.displayC = digitClickS.hold(1234);
+    });
+
+  }
+
+
+  title = 'Sodium Calculator';
 }

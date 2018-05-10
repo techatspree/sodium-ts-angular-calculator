@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Cell, Operational, Transaction} from 'sodiumjs';
 
 @Component({
   selector: 'app-display-field',
@@ -7,12 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DisplayFieldComponent implements OnInit {
 
+  @Input() displayC : Cell<number>;
+
   display : number;
 
   constructor() { }
 
   ngOnInit() {
-    this.display = 4711;
+    console.log("Init display field");
+    Transaction.run(() => {
+      Operational
+        .value(this.displayC)
+        .listen( num => { this.display = num; })
+    })
+
   }
 
 }
