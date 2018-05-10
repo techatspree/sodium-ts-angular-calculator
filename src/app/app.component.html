@@ -31,9 +31,9 @@
         </div>
       </div>
       <div class="col no-gutters">
-        <button type="button" class="btn btn-primary">+</button> <br/>
-        <button type="button" class="btn btn-primary">-</button> <br/>
-        <button type="button" class="btn btn-primary">=</button> <br/>
+        <app-operation-button [operationSymbol]="'+'" [clickF]="clickPlus" ></app-operation-button> <br/>
+        <app-operation-button [operationSymbol]="'-'" [clickF]="clickMinus"></app-operation-button> <br/>
+        <app-operation-button [operationSymbol]="'='" [clickF]="clickCompute"></app-operation-button> <br/>
       </div>
     </div>
   </div>

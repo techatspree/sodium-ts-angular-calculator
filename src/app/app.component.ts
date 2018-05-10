@@ -16,6 +16,18 @@ export class AppComponent {
     this.digitS.send(digit);
   }
 
+  private clickPlus = () => {
+    console.log("+ clicked");
+  }
+
+  private clickMinus = () => {
+    console.log("- clicked");
+  }
+
+  private clickCompute = () => {
+    console.log("= clicked");
+  }
+
   ngOnInit() {
     console.log("Init Application");
 

@@ -23,8 +23,6 @@ export class DigitButtonComponent implements OnInit {
   }
 
   onClick() {
-    console.log("CLICK - " + this.digit);
-    console.log("clickF - " + this.clickF);
     this.clickF(this.digit);
   }
 }
