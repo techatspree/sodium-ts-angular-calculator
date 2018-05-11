@@ -1,25 +1,6 @@
 import {Component} from '@angular/core';
 import {Cell, StreamSink, Transaction, CellLoop} from 'sodiumjs';
-import {Operator} from "./operator";
-
-
-class CalculatorState {
-  readonly main: number;
-  readonly back: number;
-  readonly display: number;
-  readonly activeOperator: Operator;
-
-  constructor(main: number, back: number, display: number, activeOperator: Operator) {
-    this.main = main;
-    this.back = back;
-    this.display = display;
-    this.activeOperator = activeOperator;
-  }
-
-  public withDisplay(newDisplay : number) : CalculatorState {
-    return new CalculatorState(this.main, this.back, newDisplay, this.activeOperator);
-  }
-}
+import {Operator, CalculatorState} from "./operator";
 
 @Component({
   selector: 'app-root',
