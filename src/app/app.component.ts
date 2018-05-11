@@ -15,6 +15,10 @@ class CalculatorState {
     this.display = display;
     this.activeOperator = activeOperator;
   }
+
+  public withDisplay(newDisplay : number) : CalculatorState {
+    return new CalculatorState(this.main, this.back, newDisplay, this.activeOperator);
+  }
 }
 
 @Component({
@@ -54,13 +58,16 @@ export class AppComponent {
     console.log("Init Application");
 
     Transaction.run(() => {
-      let displayLoop = new CellLoop<number>();
-      this.displayC = displayLoop;
+      let statusLoop = new CellLoop<CalculatorState>();
+      this.displayC = statusLoop.map(status => status.display);
 
       let updatedEnteredNumberS = this.digitS.snapshot(
-        this.displayC,
-        (dig, display) => display * 10 + dig);
-      displayLoop.loop(updatedEnteredNumberS.hold(0));
+        statusLoop,
+        (dig, status) => status.withDisplay(status.display * 10 + dig));
+
+      statusLoop.loop(
+        updatedEnteredNumberS.hold(
+          new CalculatorState(0,0,0, Operator.None)));
     });
   }
 
