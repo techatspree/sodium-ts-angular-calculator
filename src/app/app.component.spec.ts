@@ -32,4 +32,12 @@ describe('AppComponent', () => {
   it('should display a 0 at startup', async(() => {
     expect(lastDisplayValue).toBe(0);
   }));
+
+  it('should display a 123 after clicking the digits 1,2,3', async(() => {
+    app.clickDigit(1);
+    app.clickDigit(2);
+    app.clickDigit(3);
+    expect(lastDisplayValue).toBe(123);
+  }));
+
 });

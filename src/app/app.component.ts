@@ -14,23 +14,23 @@ export class AppComponent {
   private digitS: StreamSink<number> = new StreamSink();
 
   // noinspection JSUnusedLocalSymbols
-  private clickDigit = (digit: number) => {
+  clickDigit = (digit: number) => {
     console.log("clickDigit - "+ digit);
     this.digitS.send(digit);
   };
 
   // noinspection JSUnusedLocalSymbols
-  private clickPlus = () => {
+  clickPlus = () => {
     console.log("+ clicked");
   };
 
   // noinspection JSUnusedLocalSymbols
-  private clickMinus = () => {
+  clickMinus = () => {
     console.log("- clicked");
   };
 
   // noinspection JSUnusedLocalSymbols
-  private clickCompute = () => {
+  clickCompute = () => {
     console.log("= clicked");
   };
 
