@@ -19,7 +19,7 @@ export class DisplayFieldComponent implements OnInit {
     Transaction.run(() => {
       Operational
         .updates(this.displayC)
-        .listen( num => { this.display = num; });
+        .listen( num => { this.display = num; console.log("received new display value " + num); });
     });
   }
 
