@@ -36,11 +36,9 @@ describe('DisplayFieldComponent', () => {
 
   it('should show changes of display cell in the text field', async(() => {
     const newDisplay = 4711;
-
     testDisplayS.send(newDisplay);
 
     expect(lastDisplayValue).toBe(newDisplay);
-
     fixture.detectChanges();
 
     let displayField = fixture.debugElement.nativeElement.querySelector('#displayFieldId');
