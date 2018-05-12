@@ -47,6 +47,9 @@ export class CalculatorState {
     return new CalculatorState(this.main, this.back, newDisplay, this.activeOperator);
   }
 
+  resetMainAndback() : CalculatorState {
+    return new CalculatorState(0,0, this.display, this.activeOperator);
+  }
 }
 
 // this could be private methods, hm, or the logic in the class above could be removed from the class...

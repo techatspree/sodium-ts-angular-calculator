@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Cell, StreamSink, Transaction, CellLoop} from 'sodiumjs';
-import {Operator, CalculatorState} from "./operator";
+import {Cell, CellLoop, StreamSink, Transaction, Unit} from 'sodiumjs';
+import {CalculatorState, Operator} from "./operator";
 
 @Component({
   selector: 'app-root',
@@ -13,9 +13,10 @@ export class AppComponent {
 
   private digitS: StreamSink<number> = new StreamSink();
   private operatorS: StreamSink<Operator> = new StreamSink();
+  private computeS: StreamSink<Unit> = new StreamSink();
 
   clickDigit = (digit: number) => {
-    console.log("clickDigit - "+ digit);
+    console.log("clickDigit - " + digit);
     this.digitS.send(digit);
   };
 
@@ -34,7 +35,9 @@ export class AppComponent {
   // noinspection JSUnusedLocalSymbols
   clickCompute = () => {
     console.log("= clicked");
+    this.computeS.send(Unit.UNIT);
   };
+
 
   // noinspection JSUnusedGlobalSymbols
   ngOnInit() {
@@ -45,17 +48,22 @@ export class AppComponent {
       this.displayC = statusC.map(status => status.display);
 
       const updatedStateFromOperatorS = this.operatorS.snapshot(statusC,
-        (op,status) => status.applyActiveOperatorAndSetOperator(op));
+        (op, status) => status.applyActiveOperatorAndSetOperator(op));
+
+      const updatedStateFromCompute = this.computeS.snapshot(statusC,
+        (u, status) => status.applyActiveOperatorAndSetOperator(Operator.None).resetMainAndback());
 
       const updatedEnteredNumberS = this.digitS.snapshot(
         statusC,
         (dig, status) => status.withDisplayAndMain(status.main * 10 + dig));
 
-      const updatedStateS = updatedEnteredNumberS.orElse(updatedStateFromOperatorS);
+      const updatedStateS = updatedEnteredNumberS
+        .orElse(updatedStateFromOperatorS)
+        .orElse(updatedStateFromCompute);
 
       statusC.loop(
         updatedStateS.hold(
-          new CalculatorState(0,0,0, Operator.None)));
+          new CalculatorState(0, 0, 0, Operator.None)));
     });
   }
 

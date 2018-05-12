@@ -45,8 +45,18 @@ describe('AppComponent', () => {
     app.clickDigit(0);
     app.clickPlus();
     app.clickDigit(2);
-    app.clickPlus()
+    app.clickPlus();
     expect(lastDisplayValue).toBe(12);
   }));
+
+  it('should display a 12 after adding 10 and 2 press compute', async(() => {
+    app.clickDigit(1);
+    app.clickDigit(0);
+    app.clickPlus();
+    app.clickDigit(2);
+    app.clickCompute();
+    expect(lastDisplayValue).toBe(12);
+  }));
+
 
 });
