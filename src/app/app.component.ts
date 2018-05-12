@@ -12,8 +12,8 @@ export class AppComponent {
   displayC: Cell<number>;
 
   private digitS: StreamSink<number> = new StreamSink();
+  private operatorS: StreamSink<Operator> = new StreamSink();
 
-  // noinspection JSUnusedLocalSymbols
   clickDigit = (digit: number) => {
     console.log("clickDigit - "+ digit);
     this.digitS.send(digit);
@@ -22,11 +22,13 @@ export class AppComponent {
   // noinspection JSUnusedLocalSymbols
   clickPlus = () => {
     console.log("+ clicked");
+    this.operatorS.send(Operator.Plus);
   };
 
   // noinspection JSUnusedLocalSymbols
   clickMinus = () => {
     console.log("- clicked");
+    this.operatorS.send(Operator.Minus);
   };
 
   // noinspection JSUnusedLocalSymbols
@@ -39,15 +41,20 @@ export class AppComponent {
     console.log("Init Application");
 
     Transaction.run(() => {
-      let statusLoop = new CellLoop<CalculatorState>();
-      this.displayC = statusLoop.map(status => status.display);
+      const statusC = new CellLoop<CalculatorState>();
+      this.displayC = statusC.map(status => status.display);
 
-      let updatedEnteredNumberS = this.digitS.snapshot(
-        statusLoop,
-        (dig, status) => status.withDisplay(status.display * 10 + dig));
+      const updatedStateFromOperatorS = this.operatorS.snapshot(statusC,
+        (op,status) => status.applyActiveOperatorAndSetOperator(op));
 
-      statusLoop.loop(
-        updatedEnteredNumberS.hold(
+      const updatedEnteredNumberS = this.digitS.snapshot(
+        statusC,
+        (dig, status) => status.withDisplayAndMain(status.main * 10 + dig));
+
+      const updatedStateS = updatedEnteredNumberS.orElse(updatedStateFromOperatorS);
+
+      statusC.loop(
+        updatedStateS.hold(
           new CalculatorState(0,0,0, Operator.None)));
     });
   }

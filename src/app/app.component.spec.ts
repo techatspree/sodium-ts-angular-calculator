@@ -40,4 +40,13 @@ describe('AppComponent', () => {
     expect(lastDisplayValue).toBe(123);
   }));
 
+  it('should display a 12 after adding 10 and 2 and continue to add', async(() => {
+    app.clickDigit(1);
+    app.clickDigit(0);
+    app.clickPlus();
+    app.clickDigit(2);
+    app.clickPlus()
+    expect(lastDisplayValue).toBe(12);
+  }));
+
 });
