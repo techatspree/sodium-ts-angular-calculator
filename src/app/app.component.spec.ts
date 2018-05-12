@@ -58,5 +58,37 @@ describe('AppComponent', () => {
     expect(lastDisplayValue).toBe(12);
   }));
 
+  it('should display a 15 after adding 10 and 2 and 3 ', async(() => {
+    app.clickDigit(1);
+    app.clickDigit(0);
+    app.clickPlus();
+    app.clickDigit(2);
+    app.clickPlus();
+    app.clickDigit(3);
+    app.clickCompute();
+    expect(lastDisplayValue).toBe(15);
+  }));
+
+  it('should display a 8 after subtracting 2 from 10', async(() => {
+    app.clickDigit(1);
+    app.clickDigit(0);
+    app.clickMinus();
+    app.clickDigit(2);
+    app.clickCompute();
+    expect(lastDisplayValue).toBe(8);
+  }));
+
+  it('should display a 12 after 10-2+4', async(() => {
+    app.clickDigit(1);
+    app.clickDigit(0);
+    app.clickMinus();
+    app.clickDigit(2);
+    app.clickPlus();
+    app.clickDigit(4);
+    app.clickCompute();
+    expect(lastDisplayValue).toBe(12);
+  }));
+
+
 
 });

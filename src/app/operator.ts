@@ -59,7 +59,7 @@ function applyPlus(s: CalculatorState, newOp: Operator) : CalculatorState {
 }
 
 function applyMinus(s: CalculatorState, newOp: Operator) : CalculatorState {
-  return s.applyFunctionShowResultSetNewOperator( (m,b) => m-b, newOp);
+  return s.applyFunctionShowResultSetNewOperator( (m,b) => b-m, newOp);
 }
 
 function applyCompute(s: CalculatorState, newOp: Operator) : CalculatorState {
