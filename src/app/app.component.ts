@@ -67,5 +67,6 @@ export class AppComponent {
     });
   }
 
+  // noinspection JSUnusedGlobalSymbols
   title = 'Sodium Calculator';
 }

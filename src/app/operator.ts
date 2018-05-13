@@ -35,6 +35,7 @@ export class CalculatorState {
       return new CalculatorState(0, result, result, newOp);
   }
 
+  // noinspection JSUnusedGlobalSymbols
   withOperator(op: Operator): CalculatorState {
     return new CalculatorState(this.main, this.back, this.display, op);
   }
@@ -43,6 +44,7 @@ export class CalculatorState {
     return new CalculatorState(value, this.back, value, this.activeOperator);
   }
 
+  // noinspection JSUnusedGlobalSymbols
   withDisplay(newDisplay: number): CalculatorState {
     return new CalculatorState(this.main, this.back, newDisplay, this.activeOperator);
   }
@@ -62,10 +64,12 @@ function applyMinus(s: CalculatorState, newOp: Operator) : CalculatorState {
   return s.applyFunctionShowResultSetNewOperator( (m,b) => b-m, newOp);
 }
 
+// noinspection JSUnusedLocalSymbols
 function applyCompute(s: CalculatorState, newOp: Operator) : CalculatorState {
   return s;
 }
 
 function applyNone(s: CalculatorState, newOp: Operator) : CalculatorState {
+  // noinspection JSUnusedLocalSymbols
   return s.applyFunctionShowResultSetNewOperator( (m,b) => m, newOp)
 }
