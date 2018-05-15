@@ -1,14 +1,7 @@
 # How to build
 
-* install autoconf
-
-brew install autoconf
-
-* install automake
-
-brew install automake
-
-* install sodium (todo: check with clean app, maybe it is part of the config) 
+npm install
+ng serve
 
 # SodiumTsAngularCalculator
 
