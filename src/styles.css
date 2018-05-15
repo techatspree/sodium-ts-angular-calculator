@@ -1,2 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
-@import '~bootstrap/dist/css/bootstrap.min.css';
+button {
+  font-size: 16px;
+  background-color: dodgerblue;
+  color: white;
+  border-radius: 4px;
+}
+
+td {
+  height: 42px;
+}
+
+input {
+  font-size: 16px;
+  background-color: lightgray;
+  border: inset;
+  padding: 8px;
+  text-align: right;
+}

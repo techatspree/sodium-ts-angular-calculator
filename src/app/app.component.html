@@ -1,41 +1,33 @@
 <h1>{{title}}</h1>
-<div style="text-align:center">
-  <!-- todo width in eine CSS-Datei auslagern -->
-  <div class="container" style="width: 250px">
-    <div class="row">
-      <app-display-field [displayC]="displayC"></app-display-field>
-    </div>
-    <div class="row no-gutters">
-      <div class="col no-gutters">
-        <div class="row no-gutters">
-          <div class="col no-gutters">
-            <app-digit-button [digit]="7" [clickF]="clickDigit"></app-digit-button> <br/>
-            <app-digit-button [digit]="4" [clickF]="clickDigit"></app-digit-button> <br/>
-            <app-digit-button [digit]="1" [clickF]="clickDigit"></app-digit-button> <br/>
-          </div>
-          <div class="col no-gutters">
-            <app-digit-button [digit]="8" [clickF]="clickDigit"></app-digit-button> <br/>
-            <app-digit-button [digit]="5" [clickF]="clickDigit"></app-digit-button> <br/>
-            <app-digit-button [digit]="2" [clickF]="clickDigit"></app-digit-button> <br/>
-          </div>
-          <div class="col no-gutters">
-            <app-digit-button [digit]="9" [clickF]="clickDigit"></app-digit-button> <br/>
-            <app-digit-button [digit]="6" [clickF]="clickDigit"></app-digit-button> <br/>
-            <app-digit-button [digit]="3" [clickF]="clickDigit"></app-digit-button> <br/>
-          </div>
-        </div>
-        <div class="row no-gutters">
-          <div class="col center">
-            <app-digit-button [digit]="0"></app-digit-button>
-          </div>
-        </div>
-      </div>
-      <div class="col no-gutters">
-        <app-operation-button [operationSymbol]="'+'" [clickF]="clickPlus" ></app-operation-button> <br/>
-        <app-operation-button [operationSymbol]="'-'" [clickF]="clickMinus"></app-operation-button> <br/>
-        <app-operation-button [operationSymbol]="'='" [clickF]="clickCompute"></app-operation-button> <br/>
-      </div>
-    </div>
+<div class="content">
+  <div class="container">
+    <table class="calculator">
+      <tr>
+        <td colspan="4"><app-display-field [displayC]="displayC"></app-display-field></td>
+      </tr>
+      <tr>
+        <td><app-digit-button [digit]="7" [clickF]="clickDigit"></app-digit-button></td>
+        <td><app-digit-button [digit]="8" [clickF]="clickDigit"></app-digit-button></td>
+        <td><app-digit-button [digit]="9" [clickF]="clickDigit"></app-digit-button></td>
+        <td><app-operation-button [operationSymbol]="'+'" [clickF]="clickPlus"></app-operation-button></td> 
+      </tr>
+      <tr>
+        <td><app-digit-button [digit]="4" [clickF]="clickDigit"></app-digit-button></td>
+        <td><app-digit-button [digit]="5" [clickF]="clickDigit"></app-digit-button></td>
+        <td><app-digit-button [digit]="6" [clickF]="clickDigit"></app-digit-button></td>
+        <td><app-operation-button [operationSymbol]="'-'" [clickF]="clickMinus"></app-operation-button></td>
+      </tr>
+      <tr>
+        <td><app-digit-button [digit]="1" [clickF]="clickDigit"></app-digit-button></td>
+        <td><app-digit-button [digit]="2" [clickF]="clickDigit"></app-digit-button></td>
+        <td><app-digit-button [digit]="3" [clickF]="clickDigit"></app-digit-button></td>
+        <td rowspan="2"><app-operation-button [operationSymbol]="'='" [clickF]="clickCompute"></app-operation-button></td>
+      </tr>
+      <tr>
+        <td colspan="2"><app-digit-button [digit]="0" [clickF]="clickDigit"></app-digit-button></td>
+        <td colspan="1"></td>
+      </tr>
+    </table>
   </div>
 </div>
 
