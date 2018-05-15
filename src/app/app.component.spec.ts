@@ -4,24 +4,24 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Operational, Transaction } from 'sodiumjs';
 
 describe('AppComponent', () => {
-  let lastDisplayValue : number;
-  let fixture : ComponentFixture<AppComponent>;
-  let app : AppComponent;
+  let lastDisplayValue: number;
+  let fixture: ComponentFixture<AppComponent>;
+  let app: AppComponent;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations:  [AppComponent ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents()
-      .then(() =>{
+      .then(() => {
         fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         app = fixture.debugElement.componentInstance;
         Transaction.run(() => {
           Operational
             .value(app.displayC)
-            .listen(n => {lastDisplayValue = n;})
-        })
+            .listen(n => { lastDisplayValue = n; });
+        });
       });
   }));
 
@@ -88,7 +88,4 @@ describe('AppComponent', () => {
     app.clickCompute();
     expect(lastDisplayValue).toBe(12);
   }));
-
-
-
 });

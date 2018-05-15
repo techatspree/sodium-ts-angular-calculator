@@ -41,8 +41,8 @@ describe('DisplayFieldComponent', () => {
     expect(lastDisplayValue).toBe(newDisplay);
     fixture.detectChanges();
 
-    let displayField = fixture.debugElement.nativeElement.querySelector('#displayFieldId');
-    expect(displayField.value).toBe("" + newDisplay);
+    const displayField = fixture.debugElement.nativeElement.querySelector('#displayFieldId');
+    expect(displayField.value).toBe('' + newDisplay);
   }));
 
 });

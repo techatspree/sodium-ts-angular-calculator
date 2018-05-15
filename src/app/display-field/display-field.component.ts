@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Cell, Operational, Transaction} from 'sodiumjs';
 
+// TODO: OnPush + Observable + async im html
 @Component({
   selector: 'app-display-field',
   templateUrl: './display-field.component.html',
@@ -8,18 +9,18 @@ import {Cell, Operational, Transaction} from 'sodiumjs';
 })
 export class DisplayFieldComponent implements OnInit {
 
-  @Input() displayC : Cell<number>;
+  @Input() displayC: Cell<number>;
 
-  display : number;
+  display: number;
 
   constructor() { }
 
   ngOnInit() {
-    console.log("Init display field");
+    console.log('Init display field');
     Transaction.run(() => {
       Operational
         .updates(this.displayC)
-        .listen( num => { this.display = num; console.log("received new display value " + num); });
+        .listen( num => { this.display = num; console.log('received new display value ' + num); });
     });
   }
 
