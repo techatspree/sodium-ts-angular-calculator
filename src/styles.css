@@ -9,6 +9,10 @@ td {
   height: 42px;
 }
 
+td[rowspan="2"] {
+  height: 84px;
+}
+
 input {
   font-size: 16px;
   background-color: lightgray;
