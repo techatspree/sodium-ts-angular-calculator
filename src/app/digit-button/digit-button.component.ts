@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
+import {StreamSink, Unit, Stream } from 'sodiumjs';
 
 @Component({
   selector: 'app-digit-button',
@@ -10,6 +11,11 @@ export class DigitButtonComponent implements OnInit {
   @Input() digit: number;
   @Input() clickF: (dig: number) => void;
 
+  private streamSink : StreamSink<Unit> = new StreamSink<Unit>();
+  stream : Stream<Unit> = this.streamSink;
+
+  public clickOutput = "CLICK";
+
   constructor() {
   }
 
@@ -18,5 +24,6 @@ export class DigitButtonComponent implements OnInit {
 
   onClick() {
     this.clickF(this.digit);
+    this.streamSink.send(Unit.UNIT);
   }
 }

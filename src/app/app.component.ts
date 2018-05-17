@@ -1,19 +1,27 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Cell, CellLoop, StreamSink, Transaction, Unit} from 'sodiumjs';
 import {CalculatorState, Operator} from "./operator";
+import {DigitButtonComponent} from "./digit-button/digit-button.component";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
+
+  @ViewChild('digit7') digit7: DigitButtonComponent;
 
   displayC: Cell<number>;
 
   private digitS: StreamSink<number> = new StreamSink();
   private operatorS: StreamSink<Operator> = new StreamSink();
   private computeS: StreamSink<Unit> = new StreamSink();
+
+  constructor() {
+    console.log("Constructor of AppComponent");
+    console.log(Transaction.currentTransaction);
+  }
 
   clickDigit = (digit: number) => {
     console.log("clickDigit - " + digit);
@@ -42,6 +50,16 @@ export class AppComponent {
   // noinspection JSUnusedGlobalSymbols
   ngOnInit() {
     console.log("Init Application");
+
+  }
+
+  ngAfterViewInit() {
+    console.log('ngAfterViewInit');
+    console.log(this.digit7.clickOutput);
+
+    this.digit7.stream.listen(e => {
+      console.log("Click-7");
+    });
 
     Transaction.run(() => {
       const statusC = new CellLoop<CalculatorState>();
