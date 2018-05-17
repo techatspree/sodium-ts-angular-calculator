@@ -1,0 +1,9 @@
+.content {
+  text-align: center;
+}
+
+.calculator {
+  display: inline-table;
+  border-collapse: collapse;
+  border: 0;
+}

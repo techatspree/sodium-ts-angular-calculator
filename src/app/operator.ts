@@ -19,13 +19,13 @@ export class CalculatorState {
   }
 
   applyAndSet(op: Operator, newOp: Operator): CalculatorState {
-    return (op == Operator.None)
+    return (op === Operator.None)
       ? applyNone(this, newOp)
-      : (op == Operator.Compute)
+      : (op === Operator.Compute)
         ? applyCompute(this, newOp)
-        : (op == Operator.Plus)
+        : (op === Operator.Plus)
           ? applyPlus(this, newOp)
-          : (op == Operator.Minus)
+          : (op === Operator.Minus)
             ? applyMinus(this, newOp)
             : null; // should throw an exception or something like this...
   }
