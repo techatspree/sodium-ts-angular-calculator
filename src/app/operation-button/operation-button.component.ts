@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {StreamSink, Unit, Stream} from 'sodiumjs';
 
 @Component({
   selector: 'app-operation-button',
@@ -8,15 +9,17 @@ import {Component, Input, OnInit} from '@angular/core';
 export class OperationButtonComponent implements OnInit {
 
   @Input() operationSymbol: string;
-  @Input() clickF: () => void;
 
-  constructor() { }
-
-  ngOnInit() {
+  private _stream = new StreamSink<Unit>();
+  get stream() : Stream<Unit> {
+    return this._stream;
   }
 
+  ngOnInit() {}
+
   onClick() {
-    this.clickF();
+    console.log("Click "+ this.operationSymbol);
+    this._stream.send(Unit.UNIT);
   }
 
 }

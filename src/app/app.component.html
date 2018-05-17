@@ -8,19 +8,19 @@
       <td><app-digit-button #digit7 [digit]="7"></app-digit-button></td>
       <td><app-digit-button #digit8 [digit]="8" ></app-digit-button></td>
       <td><app-digit-button #digit9 [digit]="9" ></app-digit-button></td>
-      <td><app-operation-button [operationSymbol]="'+'" [clickF]="clickPlus"></app-operation-button></td>
+      <td><app-operation-button #plus [operationSymbol]="'+'"></app-operation-button></td>
     </tr>
     <tr>
       <td><app-digit-button #digit4 [digit]="4" ></app-digit-button></td>
       <td><app-digit-button #digit5 [digit]="5" ></app-digit-button></td>
       <td><app-digit-button #digit6 [digit]="6" ></app-digit-button></td>
-      <td><app-operation-button [operationSymbol]="'-'" [clickF]="clickMinus"></app-operation-button></td>
+      <td><app-operation-button #minus [operationSymbol]="'-'"></app-operation-button></td>
     </tr>
     <tr>
       <td><app-digit-button #digit1 [digit]="1" ></app-digit-button></td>
       <td><app-digit-button #digit2 [digit]="2" ></app-digit-button></td>
       <td><app-digit-button #digit3 [digit]="3" ></app-digit-button></td>
-      <td rowspan="2"><app-operation-button [operationSymbol]="'='" [clickF]="clickCompute"></app-operation-button></td>
+      <td rowspan="2"><app-operation-button #compute [operationSymbol]="'='"></app-operation-button></td>
     </tr>
     <tr>
       <td colspan="2"><app-digit-button #digit0 [digit]="0" ></app-digit-button></td>
