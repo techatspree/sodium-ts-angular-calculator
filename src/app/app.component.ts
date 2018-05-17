@@ -27,7 +27,6 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('minus') minusB: OperationButtonComponent;
   @ViewChild('compute') computeB: OperationButtonComponent;
 
-
   // noinspection JSUnusedGlobalSymbols
   ngOnInit() {
   }
@@ -35,37 +34,44 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
     console.log('ngAfterViewInit');
 
-    let displayC: Cell<number>;
-
-    Transaction.run(() => {
+    this.displayF.displayC = Transaction.run(() => {
       const statusC = new CellLoop<CalculatorState>();
 
-      displayC = statusC.map(status => status.display);
-
-      const updatedEnteredNumberS = this.wireDigitStream(statusC);
-
-      const updatedStateFromCompute = this.wireComputeStream(statusC);
-
-      const plusS = this.plusB.stream.mapTo( Operator.Plus );
-
-      const minusS: Stream<Operator> = this.minusB.stream.mapTo( Operator.Minus );
-
-      const operatorS: Stream<Operator> = plusS.orElse(minusS);
-
-      const updatedStateFromOperatorS = operatorS.snapshot(statusC,
-        (op, status) => status.applyActiveOperatorAndSetOperator(op));
-
-      const updatedStateS = updatedEnteredNumberS
-        .orElse(updatedStateFromOperatorS)
-        .orElse(updatedStateFromCompute);
-
+      const updatedStateS = this.wireStreams(statusC);
 
       statusC.loop(
         updatedStateS.hold(
           new CalculatorState(0, 0, 0, Operator.None)));
-    });
 
-    this.displayF.displayC = displayC;
+      const displayC = statusC.map(status => status.display);
+
+      return displayC;
+    });
+  }
+
+  private wireStreams(statusC) {
+    const updatedEnteredNumberS = this.wireDigitStream(statusC);
+
+    const updatedStateFromCompute = this.wireComputeStream(statusC);
+
+    const updatedStateFromOperatorS = this.wireOperators(statusC);
+
+    const updatedStateS = updatedEnteredNumberS
+      .orElse(updatedStateFromOperatorS)
+      .orElse(updatedStateFromCompute);
+    return updatedStateS;
+  }
+
+  private wireOperators(statusC : Cell<CalculatorState>) {
+    const plusS = this.plusB.stream.mapTo(Operator.Plus);
+
+    const minusS: Stream<Operator> = this.minusB.stream.mapTo(Operator.Minus);
+
+    const operatorS: Stream<Operator> = plusS.orElse(minusS);
+
+    const updatedStateFromOperatorS = operatorS.snapshot(statusC,
+      (op, status) => status.applyActiveOperatorAndSetOperator(op));
+    return updatedStateFromOperatorS;
   }
 
   private wireDigitStream(statusC: Cell<CalculatorState>): Stream<CalculatorState> {

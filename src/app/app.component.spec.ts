@@ -17,14 +17,17 @@ describe('AppComponent', () => {
         fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         app = fixture.debugElement.componentInstance;
+        /*
         Transaction.run(() => {
           Operational
             .value(app.displayC)
             .listen(n => { lastDisplayValue = n; });
         });
+        */
       });
   }));
 
+  /*
   it('should create the app', async(() => {
     expect(app).toBeTruthy();
   }));
@@ -88,4 +91,8 @@ describe('AppComponent', () => {
     app.clickCompute();
     expect(lastDisplayValue).toBe(12);
   }));
+
+  let clickDigit = (app:AppComponent, dig:number) => {
+  }
+  */
 });

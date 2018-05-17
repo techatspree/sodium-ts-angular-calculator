@@ -17,8 +17,8 @@ export class OperationButtonComponent implements OnInit {
 
   ngOnInit() {}
 
+  // noinspection JSUnusedGlobalSymbols
   onClick() {
-    console.log("Click "+ this.operationSymbol);
     this._stream.send(Unit.UNIT);
   }
 
