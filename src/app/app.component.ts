@@ -2,6 +2,8 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Cell, CellLoop, StreamSink, Transaction, Unit} from 'sodiumjs';
 import {CalculatorState, Operator} from "./operator";
 import {DigitButtonComponent} from "./digit-button/digit-button.component";
+import {DisplayFieldComponent} from "./display-field/display-field.component";
+import {OperationButtonComponent} from "./operation-button/operation-button.component";
 
 @Component({
   selector: 'app-root',
@@ -10,11 +12,21 @@ import {DigitButtonComponent} from "./digit-button/digit-button.component";
 })
 export class AppComponent implements AfterViewInit {
 
-  @ViewChild('digit7') digit7: DigitButtonComponent;
+  @ViewChild('digit1') digit1B: DigitButtonComponent;
+  @ViewChild('digit2') digit2B: DigitButtonComponent;
+  @ViewChild('digit3') digit3B: DigitButtonComponent;
+  @ViewChild('digit4') digit4B: DigitButtonComponent;
+  @ViewChild('digit5') digit5B: DigitButtonComponent;
+  @ViewChild('digit6') digit6B: DigitButtonComponent;
+  @ViewChild('digit7') digit7B: DigitButtonComponent;
+  @ViewChild('digit8') digit8B: DigitButtonComponent;
+  @ViewChild('digit9') digit9B: DigitButtonComponent;
+  @ViewChild('digit0') digit0B: DigitButtonComponent;
+  @ViewChild('display') displayF: DisplayFieldComponent;
+  @ViewChild('plus') plusB: OperationButtonComponent;
 
   displayC: Cell<number>;
 
-  private digitS: StreamSink<number> = new StreamSink();
   private operatorS: StreamSink<Operator> = new StreamSink();
   private computeS: StreamSink<Unit> = new StreamSink();
 
@@ -22,11 +34,6 @@ export class AppComponent implements AfterViewInit {
     console.log("Constructor of AppComponent");
     console.log(Transaction.currentTransaction);
   }
-
-  clickDigit = (digit: number) => {
-    console.log("clickDigit - " + digit);
-    this.digitS.send(digit);
-  };
 
   // noinspection JSUnusedLocalSymbols
   clickPlus = () => {
@@ -55,11 +62,7 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     console.log('ngAfterViewInit');
-    console.log(this.digit7.clickOutput);
 
-    this.digit7.stream.listen(e => {
-      console.log("Click-7");
-    });
 
     Transaction.run(() => {
       const statusC = new CellLoop<CalculatorState>();
@@ -71,7 +74,10 @@ export class AppComponent implements AfterViewInit {
       const updatedStateFromCompute = this.computeS.snapshot(statusC,
         (u, status) => status.applyActiveOperatorAndSetOperator(Operator.None).resetMainAndback());
 
-      const updatedEnteredNumberS = this.digitS.snapshot(
+
+      const digitS = this.combineDigitStreams();
+
+      const updatedEnteredNumberS = digitS.snapshot(
         statusC,
         (dig, status) => status.withDisplayAndMain(status.main * 10 + dig));
 
@@ -83,8 +89,23 @@ export class AppComponent implements AfterViewInit {
         updatedStateS.hold(
           new CalculatorState(0, 0, 0, Operator.None)));
     });
+    this.displayF.displayC = this.displayC;
   }
 
-  // noinspection JSUnusedGlobalSymbols
+  private combineDigitStreams() {
+    return this.digit0B.stream
+      .orElse(this.digit1B.stream)
+      .orElse(this.digit2B.stream)
+      .orElse(this.digit3B.stream)
+      .orElse(this.digit4B.stream)
+      .orElse(this.digit5B.stream)
+      .orElse(this.digit6B.stream)
+      .orElse(this.digit7B.stream)
+      .orElse(this.digit8B.stream)
+      .orElse(this.digit9B.stream)
+      .orElse(this.digit0B.stream);
+  }
+
+// noinspection JSUnusedGlobalSymbols
   title = 'Sodium Calculator';
 }

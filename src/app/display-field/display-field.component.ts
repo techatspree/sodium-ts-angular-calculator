@@ -1,6 +1,8 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {Cell, Operational} from 'sodiumjs';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
+
+
 
 @Component({
   selector: 'app-display-field',
@@ -10,16 +12,17 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class DisplayFieldComponent implements OnInit {
 
-  @Input() displayC: Cell<number>;
+  private behaviorSubject = new BehaviorSubject(0);
+  display = this.behaviorSubject.asObservable();
 
-  private displayS = new BehaviorSubject(0);
-  public display = this.displayS.asObservable();
-
-  ngOnInit() {
-    console.log('Init display field');
-      Operational.updates(this.displayC).listen( num => {
-        this.displayS.next(num);
-      });
+  set displayC(cell:Cell<number>) {
+    Operational.updates(cell).listen( num => {
+      this.behaviorSubject.next(num);
+    });
   }
 
+  ngOnInit() {}
+
+  // noinspection JSUnusedGlobalSymbols
+  ngAfterViewInit() {}
 }

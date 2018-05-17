@@ -9,21 +9,15 @@ import {StreamSink, Unit, Stream } from 'sodiumjs';
 export class DigitButtonComponent implements OnInit {
 
   @Input() digit: number;
-  @Input() clickF: (dig: number) => void;
 
-  private streamSink : StreamSink<Unit> = new StreamSink<Unit>();
-  stream : Stream<Unit> = this.streamSink;
-
-  public clickOutput = "CLICK";
-
-  constructor() {
+  private streamSink : StreamSink<number> = new StreamSink<number>();
+  get stream() : Stream<number> {
+    return this.streamSink;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onClick() {
-    this.clickF(this.digit);
-    this.streamSink.send(Unit.UNIT);
+    this.streamSink.send(this.digit);
   }
 }

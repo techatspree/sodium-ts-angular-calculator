@@ -2,28 +2,28 @@
   <h1>{{title}}</h1>
   <table class="calculator">
     <tr>
-      <td colspan="4"><app-display-field [displayC]="displayC"></app-display-field></td>
+      <td colspan="4"><app-display-field #display></app-display-field></td>
     </tr>
     <tr>
-      <td><app-digit-button [digit]="7" [clickF]="clickDigit"></app-digit-button></td>
-      <td><app-digit-button [digit]="8" [clickF]="clickDigit"></app-digit-button></td>
-      <td><app-digit-button [digit]="9" [clickF]="clickDigit"></app-digit-button></td>
+      <td><app-digit-button #digit7 [digit]="7"></app-digit-button></td>
+      <td><app-digit-button #digit8 [digit]="8" ></app-digit-button></td>
+      <td><app-digit-button #digit9 [digit]="9" ></app-digit-button></td>
       <td><app-operation-button [operationSymbol]="'+'" [clickF]="clickPlus"></app-operation-button></td>
     </tr>
     <tr>
-      <td><app-digit-button [digit]="4" [clickF]="clickDigit"></app-digit-button></td>
-      <td><app-digit-button [digit]="5" [clickF]="clickDigit"></app-digit-button></td>
-      <td><app-digit-button [digit]="6" [clickF]="clickDigit"></app-digit-button></td>
+      <td><app-digit-button #digit4 [digit]="4" ></app-digit-button></td>
+      <td><app-digit-button #digit5 [digit]="5" ></app-digit-button></td>
+      <td><app-digit-button #digit6 [digit]="6" ></app-digit-button></td>
       <td><app-operation-button [operationSymbol]="'-'" [clickF]="clickMinus"></app-operation-button></td>
     </tr>
     <tr>
-      <td><app-digit-button [digit]="1" [clickF]="clickDigit"></app-digit-button></td>
-      <td><app-digit-button [digit]="2" [clickF]="clickDigit"></app-digit-button></td>
-      <td><app-digit-button [digit]="3" [clickF]="clickDigit"></app-digit-button></td>
+      <td><app-digit-button #digit1 [digit]="1" ></app-digit-button></td>
+      <td><app-digit-button #digit2 [digit]="2" ></app-digit-button></td>
+      <td><app-digit-button #digit3 [digit]="3" ></app-digit-button></td>
       <td rowspan="2"><app-operation-button [operationSymbol]="'='" [clickF]="clickCompute"></app-operation-button></td>
     </tr>
     <tr>
-      <td colspan="2"><app-digit-button [digit]="0" [clickF]="clickDigit"></app-digit-button></td>
+      <td colspan="2"><app-digit-button #digit0 [digit]="0" ></app-digit-button></td>
       <td colspan="1"></td>
     </tr>
   </table>
