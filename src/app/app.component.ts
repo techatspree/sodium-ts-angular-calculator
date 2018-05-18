@@ -28,11 +28,12 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('compute') computeB: OperationButtonComponent;
 
   // noinspection JSUnusedGlobalSymbols
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     console.log('ngAfterViewInit');
+
+    console.log(this.digit0B);
 
     this.displayF.displayC = Transaction.run(() => {
       const statusC = new CellLoop<CalculatorState>();
@@ -56,49 +57,38 @@ export class AppComponent implements AfterViewInit {
 
     const updatedStateFromOperatorS = this.wireOperators(statusC);
 
-    const updatedStateS = updatedEnteredNumberS
+    return updatedEnteredNumberS
       .orElse(updatedStateFromOperatorS)
       .orElse(updatedStateFromCompute);
-    return updatedStateS;
   }
 
-  private wireOperators(statusC : Cell<CalculatorState>) {
+  private wireOperators(statusC: Cell<CalculatorState>) {
     const plusS = this.plusB.stream.mapTo(Operator.Plus);
 
     const minusS: Stream<Operator> = this.minusB.stream.mapTo(Operator.Minus);
 
     const operatorS: Stream<Operator> = plusS.orElse(minusS);
 
-    const updatedStateFromOperatorS = operatorS.snapshot(statusC,
-      (op, status) => status.applyActiveOperatorAndSetOperator(op));
-    return updatedStateFromOperatorS;
+    return operatorS.snapshot(statusC,
+      (op, status) =>
+        status.applyActiveOperatorAndSetOperator(op));
   }
 
   private wireDigitStream(statusC: Cell<CalculatorState>): Stream<CalculatorState> {
     const digitS = this.combineDigitStreams();
-    const updatedEnteredNumberS = digitS.snapshot(
+    return digitS.snapshot(
       statusC,
-      (dig, status) => status.withDisplayAndMain(status.main * 10 + dig));
-    return updatedEnteredNumberS;
+      (dig, status) =>
+        status.withDisplayAndMain(status.main * 10 + dig));
   }
 
   private wireComputeStream(statusC: Cell<CalculatorState>): Stream<CalculatorState> {
-    const updatedStateFromCompute = this.computeB.stream.snapshot(statusC,
-      (u, status) => status.applyActiveOperatorAndSetOperator(Operator.None).resetMainAndback());
-    return updatedStateFromCompute;
-  }
-
-  private wireOperatorStreams(statusC: Cell<CalculatorState>): Stream<CalculatorState> {
-    console.log("a");
-    const plusS: Stream<Operator> = this.plusB.stream.map((u => Operator.Plus));
-    console.log("b");
-    const minusS: Stream<Operator> = this.plusB.stream.map(u => Operator.Plus);
-    console.log("c");
-    const operatorS: Stream<Operator> = plusS.orElse(minusS);
-
-    const updatedStateFromOperatorS = operatorS.snapshot(statusC,
-      (op, status) => status.applyActiveOperatorAndSetOperator(op));
-    return updatedStateFromOperatorS;
+    return this.computeB.stream
+      .snapshot(statusC,
+        (u, status) =>
+          status
+            .applyActiveOperatorAndSetOperator(Operator.None)
+            .resetMainAndback());
   }
 
   private combineDigitStreams(): Stream<number> {
