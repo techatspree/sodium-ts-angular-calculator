@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Cell, CellLoop, Stream, Transaction} from 'sodiumjs';
-import {CalculatorState, Operator} from "./operator";
-import {DigitButtonComponent} from "./digit-button/digit-button.component";
-import {DisplayFieldComponent} from "./display-field/display-field.component";
-import {OperationButtonComponent} from "./operation-button/operation-button.component";
+import {CalculatorState, Operator} from './operator';
+import {DigitButtonComponent} from './digit-button/digit-button.component';
+import {DisplayFieldComponent} from './display-field/display-field.component';
+import {OperationButtonComponent} from './operation-button/operation-button.component';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,8 @@ import {OperationButtonComponent} from "./operation-button/operation-button.comp
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
+  // noinspection JSUnusedGlobalSymbols
+  title = 'Sodium Calculator';
 
   @ViewChild('digit1') digit1B: DigitButtonComponent;
   @ViewChild('digit2') digit2B: DigitButtonComponent;
@@ -26,10 +28,6 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('plus') plusB: OperationButtonComponent;
   @ViewChild('minus') minusB: OperationButtonComponent;
   @ViewChild('compute') computeB: OperationButtonComponent;
-
-  // noinspection JSUnusedGlobalSymbols
-  ngOnInit() {
-  }
 
   ngAfterViewInit() {
     console.log('ngAfterViewInit');
@@ -49,7 +47,7 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  private wireStreams(statusC) {
+  private wireStreams(statusC: Cell<CalculatorState>) {
     const updatedEnteredNumberS = this.wireDigitStream(statusC);
 
     const updatedStateFromCompute = this.wireComputeStream(statusC);
@@ -62,7 +60,7 @@ export class AppComponent implements AfterViewInit {
     return updatedStateS;
   }
 
-  private wireOperators(statusC : Cell<CalculatorState>) {
+  private wireOperators(statusC: Cell<CalculatorState>) {
     const plusS = this.plusB.stream.mapTo(Operator.Plus);
 
     const minusS: Stream<Operator> = this.minusB.stream.mapTo(Operator.Minus);
@@ -89,11 +87,8 @@ export class AppComponent implements AfterViewInit {
   }
 
   private wireOperatorStreams(statusC: Cell<CalculatorState>): Stream<CalculatorState> {
-    console.log("a");
     const plusS: Stream<Operator> = this.plusB.stream.map((u => Operator.Plus));
-    console.log("b");
     const minusS: Stream<Operator> = this.plusB.stream.map(u => Operator.Plus);
-    console.log("c");
     const operatorS: Stream<Operator> = plusS.orElse(minusS);
 
     const updatedStateFromOperatorS = operatorS.snapshot(statusC,
@@ -114,7 +109,4 @@ export class AppComponent implements AfterViewInit {
       .orElse(this.digit9B.stream)
       .orElse(this.digit0B.stream);
   }
-
-// noinspection JSUnusedGlobalSymbols
-  title = 'Sodium Calculator';
 }
