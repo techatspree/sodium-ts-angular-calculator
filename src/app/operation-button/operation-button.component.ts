@@ -11,7 +11,7 @@ export class OperationButtonComponent implements OnInit {
   @Input() operationSymbol: string;
 
   private _stream = new StreamSink<Unit>();
-  get stream() : Stream<Unit> {
+  get stream(): Stream<Unit> {
     return this._stream;
   }
 

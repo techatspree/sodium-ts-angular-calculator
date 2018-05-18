@@ -10,8 +10,8 @@ export class DigitButtonComponent implements OnInit {
 
   @Input() digit: number;
 
-  private streamSink : StreamSink<number> = new StreamSink<number>();
-  get stream() : Stream<number> {
+  private streamSink: StreamSink<number> = new StreamSink<number>();
+  get stream(): Stream<number> {
     return this.streamSink;
   }
 
