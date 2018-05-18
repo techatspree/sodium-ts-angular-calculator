@@ -1,7 +1,9 @@
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { Operational, Transaction } from 'sodiumjs';
+import {DigitButtonComponent} from './digit-button/digit-button.component';
+import {OperationButtonComponent} from './operation-button/operation-button.component';
+import {DisplayFieldComponent} from './display-field/display-field.component';
 
 describe('AppComponent', () => {
   let lastDisplayValue: number;
@@ -10,24 +12,23 @@ describe('AppComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations:  [AppComponent ],
+      declarations:  [
+        AppComponent,
+        DigitButtonComponent,
+        OperationButtonComponent,
+        DisplayFieldComponent
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents()
       .then(() => {
         fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         app = fixture.debugElement.componentInstance;
-        /*
-        Transaction.run(() => {
-          Operational
-            .value(app.displayC)
-            .listen(n => { lastDisplayValue = n; });
-        });
-        */
+        app.displayF.display.subscribe(n => { lastDisplayValue = n; });
       });
   }));
 
-  /*
+
   it('should create the app', async(() => {
     expect(app).toBeTruthy();
   }));
@@ -37,62 +38,59 @@ describe('AppComponent', () => {
   }));
 
   it('should display a 123 after clicking the digits 1,2,3', async(() => {
-    app.clickDigit(1);
-    app.clickDigit(2);
-    app.clickDigit(3);
+    app.digit1B.onClick();
+    app.digit2B.onClick();
+    app.digit3B.onClick();
     expect(lastDisplayValue).toBe(123);
   }));
 
   it('should display a 12 after adding 10 and 2 and continue to add', async(() => {
-    app.clickDigit(1);
-    app.clickDigit(0);
-    app.clickPlus();
-    app.clickDigit(2);
-    app.clickPlus();
+    app.digit1B.onClick();
+    app.digit0B.onClick();
+    app.plusB.onClick();
+    app.digit2B.onClick();
+    app.plusB.onClick();
     expect(lastDisplayValue).toBe(12);
   }));
 
   it('should display a 12 after adding 10 and 2 press compute', async(() => {
-    app.clickDigit(1);
-    app.clickDigit(0);
-    app.clickPlus();
-    app.clickDigit(2);
-    app.clickCompute();
+    app.digit1B.onClick();
+    app.digit0B.onClick();
+    app.plusB.onClick();
+    app.digit2B.onClick();
+    app.computeB.onClick();
     expect(lastDisplayValue).toBe(12);
   }));
 
   it('should display a 15 after adding 10 and 2 and 3 ', async(() => {
-    app.clickDigit(1);
-    app.clickDigit(0);
-    app.clickPlus();
-    app.clickDigit(2);
-    app.clickPlus();
-    app.clickDigit(3);
-    app.clickCompute();
+    app.digit1B.onClick();
+    app.digit0B.onClick();
+    app.plusB.onClick();
+    app.digit2B.onClick();
+    app.plusB.onClick();
+    app.digit3B.onClick();
+    app.computeB.onClick();
     expect(lastDisplayValue).toBe(15);
   }));
 
   it('should display a 8 after subtracting 2 from 10', async(() => {
-    app.clickDigit(1);
-    app.clickDigit(0);
-    app.clickMinus();
-    app.clickDigit(2);
-    app.clickCompute();
+    app.digit1B.onClick();
+    app.digit0B.onClick();
+    app.minusB.onClick();
+    app.digit2B.onClick();
+    app.computeB.onClick();
     expect(lastDisplayValue).toBe(8);
   }));
 
   it('should display a 12 after 10-2+4', async(() => {
-    app.clickDigit(1);
-    app.clickDigit(0);
-    app.clickMinus();
-    app.clickDigit(2);
-    app.clickPlus();
-    app.clickDigit(4);
-    app.clickCompute();
+    app.digit1B.onClick();
+    app.digit0B.onClick();
+    app.minusB.onClick();
+    app.digit2B.onClick();
+    app.plusB.onClick();
+    app.digit4B.onClick();
+    app.computeB.onClick();
     expect(lastDisplayValue).toBe(12);
   }));
 
-  let clickDigit = (app:AppComponent, dig:number) => {
-  }
-  */
 });

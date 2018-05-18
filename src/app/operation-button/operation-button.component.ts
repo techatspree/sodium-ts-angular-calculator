@@ -6,7 +6,7 @@ import {StreamSink, Unit, Stream} from 'sodiumjs';
   templateUrl: './operation-button.component.html',
   styleUrls: ['./operation-button.component.css']
 })
-export class OperationButtonComponent implements OnInit {
+export class OperationButtonComponent {
 
   @Input() operationSymbol: string;
 
@@ -14,8 +14,6 @@ export class OperationButtonComponent implements OnInit {
   get stream(): Stream<Unit> {
     return this._stream;
   }
-
-  ngOnInit() {}
 
   // noinspection JSUnusedGlobalSymbols
   onClick() {

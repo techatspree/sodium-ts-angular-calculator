@@ -8,7 +8,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
   styleUrls: ['./display-field.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DisplayFieldComponent implements AfterViewInit {
+export class DisplayFieldComponent {
 
   private behaviorSubject = new BehaviorSubject(0);
   display = this.behaviorSubject.asObservable();
@@ -18,7 +18,4 @@ export class DisplayFieldComponent implements AfterViewInit {
       this.behaviorSubject.next(num);
     });
   }
-
-  // noinspection JSUnusedGlobalSymbols
-  ngAfterViewInit() {}
 }
