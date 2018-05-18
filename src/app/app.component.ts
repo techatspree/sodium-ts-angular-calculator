@@ -31,10 +31,6 @@ export class AppComponent implements AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    console.log('ngAfterViewInit');
-
-    console.log(this.digit0B);
-
     this.displayF.displayC = Transaction.run(() => {
       const statusC = new CellLoop<CalculatorState>();
 
