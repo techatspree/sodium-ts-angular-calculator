@@ -11,6 +11,6 @@ if (environment.production) {
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .catch(err => {
-    console.error("Could not bootup application module.");
+    console.error('Could not bootup application module.');
     console.log(err);
   });

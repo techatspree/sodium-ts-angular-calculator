@@ -7,10 +7,8 @@ export enum Operator {
 
 export class CalculatorState {
 
-  constructor(readonly main: number
-    , readonly back: number
-    , readonly display: number
-    , readonly  activeOperator: Operator) {
+  constructor(readonly main: number,
+     readonly back: number, readonly display: number, readonly activeOperator: Operator) {
   }
 
   applyActiveOperatorAndSetOperator(op: Operator) {
@@ -30,7 +28,7 @@ export class CalculatorState {
             : null; // should throw an exception or something like this...
   }
 
-  applyFunctionShowResultSetNewOperator(f: (main: number, back: number) => number, newOp: Operator) : CalculatorState {
+  applyFunctionShowResultSetNewOperator(f: (main: number, back: number) => number, newOp: Operator): CalculatorState {
       const result = f(this.main, this.back);
       return new CalculatorState(0, result, result, newOp);
   }
@@ -49,27 +47,27 @@ export class CalculatorState {
     return new CalculatorState(this.main, this.back, newDisplay, this.activeOperator);
   }
 
-  resetMainAndback() : CalculatorState {
-    return new CalculatorState(0,0, this.display, this.activeOperator);
+  resetMainAndback(): CalculatorState {
+    return new CalculatorState(0, 0, this.display, this.activeOperator);
   }
 }
 
 // this could be private methods, hm, or the logic in the class above could be removed from the class...
 
-function applyPlus(s: CalculatorState, newOp: Operator) : CalculatorState {
-  return s.applyFunctionShowResultSetNewOperator((m, b) => m+b , newOp);
+function applyPlus(s: CalculatorState, newOp: Operator): CalculatorState {
+  return s.applyFunctionShowResultSetNewOperator((m, b) => m + b , newOp);
 }
 
-function applyMinus(s: CalculatorState, newOp: Operator) : CalculatorState {
-  return s.applyFunctionShowResultSetNewOperator( (m,b) => b-m, newOp);
+function applyMinus(s: CalculatorState, newOp: Operator): CalculatorState {
+  return s.applyFunctionShowResultSetNewOperator( (m, b) => b - m, newOp);
 }
 
 // noinspection JSUnusedLocalSymbols
-function applyCompute(s: CalculatorState, newOp: Operator) : CalculatorState {
+function applyCompute(s: CalculatorState, newOp: Operator): CalculatorState {
   return s;
 }
 
-function applyNone(s: CalculatorState, newOp: Operator) : CalculatorState {
+function applyNone(s: CalculatorState, newOp: Operator): CalculatorState {
   // noinspection JSUnusedLocalSymbols
-  return s.applyFunctionShowResultSetNewOperator( (m,b) => m, newOp)
+  return s.applyFunctionShowResultSetNewOperator( (m, b) => m, newOp);
 }

@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Cell, CellLoop, Stream, Transaction} from 'sodiumjs';
-import {CalculatorState, Operator} from "./operator";
-import {DigitButtonComponent} from "./digit-button/digit-button.component";
-import {DisplayFieldComponent} from "./display-field/display-field.component";
-import {OperationButtonComponent} from "./operation-button/operation-button.component";
+import {CalculatorState, Operator} from './operator';
+import {DigitButtonComponent} from './digit-button/digit-button.component';
+import {DisplayFieldComponent} from './display-field/display-field.component';
+import {OperationButtonComponent} from './operation-button/operation-button.component';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,8 @@ import {OperationButtonComponent} from "./operation-button/operation-button.comp
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
+  // noinspection JSUnusedGlobalSymbols
+  title = 'Sodium Calculator';
 
   @ViewChild('digit1') digit1B: DigitButtonComponent;
   @ViewChild('digit2') digit2B: DigitButtonComponent;
@@ -46,7 +48,7 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  private wireDigitAndOperatorStreams(statusC) {
+   private wireDigitAndOperatorStreams(statusC) {
     const updatedEnteredNumberS = this.wireDigitStream(statusC);
 
     const updatedStateFromCompute = this.wireComputeStream(statusC);
@@ -101,6 +103,4 @@ export class AppComponent implements AfterViewInit {
             .resetMainAndback());
   }
 
-// noinspection JSUnusedGlobalSymbols
-  title = 'Sodium Calculator';
 }
