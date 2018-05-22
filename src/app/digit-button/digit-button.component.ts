@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, Output, AfterViewInit} from '@angular/core';
-import {StreamSink, Unit, Stream } from 'sodiumjs';
+import {Component, Input, AfterViewInit} from '@angular/core';
+import {StreamSink, Stream } from 'sodiumjs';
 
 @Component({
   selector: 'app-digit-button',
