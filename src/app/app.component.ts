@@ -30,9 +30,12 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('compute') computeB: OperationButtonComponent;
 
   // noinspection JSUnusedGlobalSymbols
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("ngOnInit() - AppComponent");
+  }
 
   ngAfterViewInit() {
+    console.log("ngAfterViewInit() - AppComponent");
     this.displayF.displayC = Transaction.run(() => {
       const statusC = new CellLoop<CalculatorState>();
 

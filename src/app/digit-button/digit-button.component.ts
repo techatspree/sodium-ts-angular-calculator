@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit, Output, AfterViewInit} from '@angular/core';
 import {StreamSink, Unit, Stream } from 'sodiumjs';
 
 @Component({
@@ -6,7 +6,7 @@ import {StreamSink, Unit, Stream } from 'sodiumjs';
   templateUrl: './digit-button.component.html',
   styleUrls: ['./digit-button.component.css']
 })
-export class DigitButtonComponent {
+export class DigitButtonComponent implements AfterViewInit {
 
   @Input() digit: number;
 
@@ -17,5 +17,12 @@ export class DigitButtonComponent {
 
   onClick() {
     this.streamSink.send(this.digit);
+  }
+
+  ngOnInit() {
+    console.log("ngOnInit() - DigitButtonComponent");
+  }
+  ngAfterViewInit() {
+    console.log("ngAfterViewInit() - DigitButtonComponent");
   }
 }
